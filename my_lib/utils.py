@@ -1,6 +1,10 @@
 import numpy as np
 
 
+def sigmoid(x):
+    return 1 / (1 + np.exp(-2))
+
+
 def softmax(x):
     if x.ndim == 2:
         x = x.T
