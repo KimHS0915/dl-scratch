@@ -101,7 +101,7 @@ class BatchNormalization:
         return out.reshape(*self.input_shape)
 
     def __forward(self, x, train_flg):
-        if self.running_mean in None:
+        if self.running_mean is None:
             _, d = x.shape
             self.running_mean = np.zeros(d)
             self.running_var = np.zeros(d)

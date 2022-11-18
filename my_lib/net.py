@@ -39,7 +39,7 @@ class MultiLayerNet:
     def predict(self, x):
         for layer in self.layers.values():
             x = layer.forward(x)
-            return x
+        return x
 
     def loss(self, x, t):
         y = self.predict(x)
@@ -76,10 +76,9 @@ class MultiLayerNet:
             dout = layer.backward(dout)
         grads = {}
         for i in range(1, self.hidden_layer_num + 2):
-            grads["W" + str(i)] = self.layers["Affine" + str(i)].dw + self.weight_decay_lambda * self.layers["Affine" + str(i)].w
+            grads["W" + str(i)] = self.layers["Affine" + str(i)].dW + self.weight_decay_lambda * self.layers["Affine" + str(i)].W
             grads["b" + str(i)] = self.layers["Affine" + str(i)].db
         return grads
-
 
 class MultiLayerNetExtend:
     def __init__(self, input_size, hidden_size_list, output_size, 
@@ -132,7 +131,7 @@ class MultiLayerNetExtend:
                 x = layer.forward(x, train_flg)
             else:
                 x = layer.forward(x)
-            return x
+        return x
 
     def loss(self, x, t, train_flg=False):
         y = self.predict(x, train_flg)
@@ -145,7 +144,7 @@ class MultiLayerNetExtend:
 
     def accuracy(self, x, t):
         y = self.predict(x, train_flg=False)
-        y = np.argmax(y, aixs=1)
+        y = np.argmax(y, axis=1)
         if t.ndim != 1:
             t = np.argmax(t, axis=1)
         accuracy = np.sum(y == t) / float(x.shape[0])
@@ -172,7 +171,7 @@ class MultiLayerNetExtend:
             dout = layer.backward(dout)
         grads = {}
         for i in range(1, self.hidden_layer_num + 2):
-            grads["W" + str(i)] = self.layers["Affine" + str(i)].dw + self.weight_decay_lambda * self.layers["Affine" + str(i)].w
+            grads["W" + str(i)] = self.layers["Affine" + str(i)].dW + self.weight_decay_lambda * self.layers["Affine" + str(i)].W
             grads["b" + str(i)] = self.layers["Affine" + str(i)].db
             if self.use_batchnorm and i != self.hidden_layer_num + 1:
                 grads["gamma" + str(i)] = self.layers["BatchNorm" + str(i)].dgamma
