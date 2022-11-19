@@ -52,7 +52,7 @@ class MultiLayerNet:
 
     def accuracy(self, x, t):
         y = self.predict(x)
-        y = np.argmax(y, aixs=1)
+        y = np.argmax(y, axis=1)
         if t.ndim != 1:
             t = np.argmax(t, axis=1)
         accuracy = np.sum(y == t) / float(x.shape[0])
