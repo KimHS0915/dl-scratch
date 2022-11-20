@@ -51,3 +51,9 @@ def numerical_gradient(f, x):
         x[idx] = tmp_val
         it.iternext()
     return grad
+
+def shuffle_dataset(x, t):
+    permutation = np.random.permutation(x.shape[0])
+    x = x[permutation, :] if x.ndim == 2 else x[permutation, :, :, :]
+    t = t[permutation]
+    return x, t
