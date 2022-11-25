@@ -48,7 +48,7 @@ class Trainer:
             x_test_sample, y_test_sample = self.x_test, self.y_test
             if not self.eval_sample_num_per_epoch is None:
                 t = self.eval_sample_num_per_epoch
-                x_train_sample = y_train_sample = self.x_train[:t], self.y_train[:t]
+                x_train_sample, y_train_sample = self.x_train[:t], self.y_train[:t]
                 x_test_sample, y_test_sample = self.x_test[:t], self.y_test[:t]
 
             train_acc = self.net.accuracy(x_train_sample, y_train_sample)
